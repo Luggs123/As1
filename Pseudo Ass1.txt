@@ -1,0 +1,53 @@
+interface Employable {
+	boolean determineValidity();
+	double calcBaseHoursPay(int hours);
+	double calcBaseCommissionPay(int sales);
+	double calcOvertime(int hours);
+	double calcCommission(double sales)
+}
+
+class Employee implements Employable {
+	//relevant fields - name, sales, hours, salary, base pay and commission/overtime pays
+	String name;
+	double sales;
+	int hours;
+	double hourlyPay;
+	double baseHoursPay;
+	double baseCommissionPay
+	double commissionCut;
+	double overtimePay;
+	
+	
+	Employee(String name, double sales, int hours, double hourlyPay){
+		this.name = name;
+		this.sales = sales;
+		this.hours = hours;
+		this.hourlyPay = hourlyPay;
+	}
+
+	boolean determineValidity() {
+		
+	}
+
+	double calcBaseHoursPay(int hours) {
+		return hourlyPay*(min(40, hours));
+	}
+	
+	double calcBaseCommissionPay(double sales) {
+		if 300 < sales <= 1000, return 400;
+		if 1000 < sales <= 5000, return 600;
+		if 5000 < sales <= 10000, return 900;
+		else, return 0;
+	}
+	
+	double calcOvertime(int hours){
+		return 1.5*hourlyPay*(max(0, hours-40));
+	}
+	
+	double calcCommission(double sales){
+		if 300 < sales <= 1000, return 0.1*sales;
+		if 1000 < sales <= 5000, return 0.05*sales;
+		if 5000 < sales <= 10000, return 0.01*sales;
+		else, return 0;
+	}
+}
