@@ -1,5 +1,6 @@
 .DS_Store
 /nbproject/private/*
+/bin/*
 *.log
 *.log.lck
 spell.json
