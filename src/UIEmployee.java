@@ -9,7 +9,7 @@ public class UIEmployee extends JFrame {
 	public static Panel AddEmployeePanel = new Panel();
 	public static Panel EmployeeListPanel  = new Panel();
     
-    public UIEmployee(){
+    public UIEmployee() {
     	//TODO: Figure out how to next layouts.
     	AddEmployeePanel.setLayout(new FlowLayout(3,25, 0)); //arguments: align, hgap and vgap
         JLabel USLabel = new JLabel("Employee info: ");
