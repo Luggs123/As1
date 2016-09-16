@@ -38,13 +38,12 @@ public class Employee extends AbstractEmployee {
     @Override
     public boolean determineValidity(int hrs, double sales) {
         
-	boolean validity;
+	boolean validity = true;
         
         if (sales < 300 && sales > 10000 )
         {
             validity = false;
         }
-        else validity = true;
         
         return validity;
     }
