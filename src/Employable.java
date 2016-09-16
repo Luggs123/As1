@@ -1,7 +1,7 @@
 public interface Employable {
     public double computeSalary(int hrs, double sales);
     
-    public double computeWage(int hrs, double perHour);
+    public double computeWage(int hrs);
     
     public double computeCommission(double sales);
     
