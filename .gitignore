@@ -1,6 +1,7 @@
 *.DS_Store
 */private/*
 /bin/*
+*.class
 *.log
 *.log.lck
 spell.json
