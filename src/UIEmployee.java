@@ -54,13 +54,38 @@ public class UIEmployee extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String name = NameTextField.getText();
 				ImageIcon icon = new ImageIcon(UIEmployee.class.getResource("/assets/notice.png"));
-				
-				// Parse the text fields to int and double then add the values to the buffer.
+				Boolean validHrs = true;
+				Boolean validSales = true;
+				int hrs = 0;
+				double sales = 0.0;
+
+				// Parse the text fields to int add the value to the buffer.
 				try {  
-					// Parse to the text fields to int and double
-					int hrs = Integer.parseInt(HrsTextField.getText());
-					double sales = Double.parseDouble(SalesTextField.getText());
-					
+					// Parse text field.
+					hrs = Integer.parseInt(HrsTextField.getText());
+
+					// If invalid hours then re-prompt.
+					if (hrs < 0 || hrs > 60) {
+						JOptionPane.showMessageDialog(null, "\"Hours\" parameter must be between 0 and 60." , "Output", JOptionPane.ERROR_MESSAGE, icon);
+						validSales = false;
+					}
+				} catch (NumberFormatException nfe) { 
+					// If an error is caught then throw an error dialog.
+					JOptionPane.showMessageDialog(null, "Please enter a valid \"Hours\" parameter." , "Output", JOptionPane.ERROR_MESSAGE, icon);
+					validSales = false;
+				}
+
+				// Yeah you get the idea.
+				try {
+					// Parse text field.
+					sales = Double.parseDouble(SalesTextField.getText());
+				} catch (NumberFormatException nfe) { 
+					// If an error is caught then throw an error dialog.
+					JOptionPane.showMessageDialog(null, "Please enter a valid \"Sales\" parameter." , "Output", JOptionPane.ERROR_MESSAGE, icon);
+					validSales = false;
+				}
+
+				if (validHrs && validSales) {
 					// Add it to the buffer.
 					employeeBuffer.add(new Employee(name, hrs, sales));
 
@@ -68,13 +93,10 @@ public class UIEmployee extends JFrame {
 					NameTextField.setText("");
 					HrsTextField.setText("");
 					SalesTextField.setText("");
-				} catch (NumberFormatException nfe) { 
-					// If an error is caught then throw an error dialog.
-					JOptionPane.showMessageDialog(null, "You implicitly casted bastard." , "Output", JOptionPane.ERROR_MESSAGE, icon);
 				}
 			}
 		}
-		
+
 		// If "Submit" button is pressed, fire this listener.
 		class buttonListenerSUBMIT implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
