@@ -37,22 +37,22 @@ public class UIEmployee extends JFrame {
 		employeePanel.add(frankensteinsLabel);
 
 		// Input fields.
-		final JTextField NameTextField = new JTextField(10);
-		NameTextField.setEditable(true);
-		employeePanel.add(NameTextField);
+		final JTextField nameTextField = new JTextField(10);
+		nameTextField.setEditable(true);
+		employeePanel.add(nameTextField);
 
-		final JTextField HrsTextField = new JTextField(4);
-		HrsTextField.setEditable(true);
-		employeePanel.add(HrsTextField);
+		final JTextField hrsTextField = new JTextField(4);
+		hrsTextField.setEditable(true);
+		employeePanel.add(hrsTextField);
 
-		final JTextField SalesTextField = new JTextField(6);
-		SalesTextField.setEditable(true);
-		employeePanel.add(SalesTextField);
+		final JTextField salesTextField = new JTextField(6);
+		salesTextField.setEditable(true);
+		employeePanel.add(salesTextField);
 
 		// If "Add" button is pressed, fire this listener.
 		class buttonListenerADD implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				String name = NameTextField.getText();
+				String name = nameTextField.getText();
 				ImageIcon icon = new ImageIcon(UIEmployee.class.getResource("/assets/notice.png"));
 				Boolean validHrs = true;
 				Boolean validSales = true;
@@ -62,7 +62,7 @@ public class UIEmployee extends JFrame {
 				// Parse the text fields to int add the value to the buffer.
 				try {  
 					// Parse text field.
-					hrs = Integer.parseInt(HrsTextField.getText());
+					hrs = Integer.parseInt(hrsTextField.getText());
 
 					// If invalid hours then re-prompt.
 					if (hrs < 0 || hrs > 60) {
@@ -75,10 +75,9 @@ public class UIEmployee extends JFrame {
 					validSales = false;
 				}
 
-				// Yeah you get the idea.
 				try {
 					// Parse text field.
-					sales = Double.parseDouble(SalesTextField.getText());
+					sales = Double.parseDouble(salesTextField.getText());
 				} catch (NumberFormatException nfe) { 
 					// If an error is caught then throw an error dialog.
 					JOptionPane.showMessageDialog(null, "Please enter a valid \"Sales\" parameter." , "Output", JOptionPane.ERROR_MESSAGE, icon);
@@ -90,9 +89,9 @@ public class UIEmployee extends JFrame {
 					employeeBuffer.add(new Employee(name, hrs, sales));
 
 					// Clear text fields.
-					NameTextField.setText("");
-					HrsTextField.setText("");
-					SalesTextField.setText("");
+					nameTextField.setText("");
+					hrsTextField.setText("");
+					salesTextField.setText("");
 				}
 			}
 		}

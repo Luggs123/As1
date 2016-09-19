@@ -49,7 +49,7 @@ public class Employee extends AbstractEmployee {
 		double commissionPay = 0;
 
 		//different commission brackets
-		if(300 >= sales && sales < 1000) {
+		if (300 >= sales && sales < 1000) {
 			this.setBaseCommission(400);
 			this.setBonusPercent(0.10);
 		} else if (sales >= 1000 && sales < 5000) {
