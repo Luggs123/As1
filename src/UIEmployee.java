@@ -104,7 +104,7 @@ public class UIEmployee extends JFrame {
 		UIEmployee OneFrame = new UIEmployee();
 		OneFrame.pack();
 		OneFrame.setTitle("Employee");
-		OneFrame.setSize(280,125);
+		OneFrame.setSize(290,125);
 		OneFrame.setResizable(false);
 		OneFrame.setLocationRelativeTo(null);
 		OneFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
