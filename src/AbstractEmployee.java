@@ -5,4 +5,7 @@ public abstract class AbstractEmployee implements Employable {
     protected int hours;
     protected double salary;
     protected boolean isValid;
+    protected double overtimePay;
+    protected double baseCommission;
+    protected double bonusPercent;
 }

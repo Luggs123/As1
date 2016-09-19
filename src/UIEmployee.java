@@ -102,7 +102,7 @@ public class UIEmployee extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Move buffer employee list to valid or invalid.
 				for (Employee emp : employeeBuffer) {
-					if (emp.isValid) {
+					if (emp.isValid()) {
 						validEmployees.add(emp);
 					} else {
 						invalidEmployees.add(emp);

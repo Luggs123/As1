@@ -2,28 +2,28 @@ public class Employee extends AbstractEmployee {
 
 	//sole constructor for Employee
 	public Employee(String name, int hours, double sales){
-		this.name = name;
-		this.hours = hours;
-		this.sales = sales;
+		this.setName(name);
+		this.setHours(hours);
+		this.setSales(sales);
 		
 		//salary only granted for valid employees
-		this.isValid = determineValidity(this.hours, this.sales);
+		this.determineValidity(this.hours, this.sales);
 		if (this.isValid) {
-			this.salary = computeSalary(this.hours, this.sales);
+			computeSalary(this.hours, this.sales);
 		}
 	}
 
 	@Override
-	public double computeSalary(int hrs, double sales) {
+	public void computeSalary(int hrs, double sales) {
 		//pay by hourly basis
 		if (sales >= 0 && sales <= 300) {
-			return computeWage(hrs);
+			this.setSalary(computeWage(hrs));
 			
 		//pay by commission on sales
 		} else if (sales <= 10000 && sales > 300) {
-			return computeCommission(sales);
+			this.setSalary(computeCommission(sales));
 		} else {
-			return 0;  
+			this.setSalary(0);  
 		}
 	}
 
@@ -40,37 +40,102 @@ public class Employee extends AbstractEmployee {
 		wagePay = Math.min(hrs, overtimeThreshold)*hourlyPay;
 		overtimePay = Math.max(0, hrs - overtimeThreshold)*hourlyPay*overtimeMultiplier;
 
+		this.setOvertimePay(overtimePay);
 		return wagePay + overtimePay;
 	}
 
 	@Override
 	public double computeCommission(double sales) {
-		double baseCommission = 0;
 		double commissionPay = 0;
 
 		//different commission brackets
 		if(300 >= sales && sales < 1000) {
-			baseCommission = 400;
-			commissionPay = (0.10 * sales); 
+			this.setBaseCommission(400);
+			this.setBonusPercent(0.10);
 		} else if (sales >= 1000 && sales < 5000) {
-			baseCommission = 600;
-			commissionPay = (0.05 * sales);
+			this.setBaseCommission(600);
+			this.setBonusPercent(0.05);
 		} else if (sales >= 5000 && sales <= 10000) {
-			baseCommission = 900;
-			commissionPay = (0.01 * sales);
+			this.setBaseCommission(900);
+			this.setBonusPercent(0.01);
 		}
 
-		return baseCommission + commissionPay;
+		commissionPay = sales * this.getBonusPercent();
+		return this.getBaseCommission() + commissionPay;
 	}
 
 	@Override
-	public boolean determineValidity(int hrs, double sales) {
+	public void determineValidity(int hrs, double sales) {
 		//employee is invalid if less than zero or greater than 10,000 in sales, and hours worked less than zero or more than 60
 		if (sales < 0 || sales > 10000 || hrs > 60 || hrs < 0)
 		{
-			return false;
+			this.setValid(true);
 		} else {
-			return true;
+			this.setValid(false);
 		}
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public double getSales() {
+		return sales;
+	}
+	
+	public void setSales(double sales) {
+		this.sales = sales;
+	}
+	
+	public int getHours() {
+		return hours;
+	}
+	
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+	
+	public double getSalary() {
+		return salary;
+	}
+	
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	
+	public boolean isValid() {
+		return isValid;
+	}
+	
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
+	}
+	
+	public double getOvertimePay() {
+		return overtimePay;
+	}
+	
+	public void setOvertimePay(double overtimePay) {
+		this.overtimePay = overtimePay;
+	}
+	
+	public double getBaseCommission() {
+		return baseCommission;
+	}
+	
+	public void setBaseCommission(double baseCommission) {
+		this.baseCommission = baseCommission;
+	}
+	
+	public double getBonusPercent() {
+		return bonusPercent;
+	}
+	
+	public void setBonusPercent(double bonusPercent) {
+		this.bonusPercent = bonusPercent;
 	}
 }
