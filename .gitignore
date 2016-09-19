@@ -2,3 +2,8 @@
 *.log
 *.json
 *.class
+
+#NetBeans-specific.
+/nbproject/*
+/build/*
+build.xml
