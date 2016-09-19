@@ -1,26 +1,30 @@
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.Icon;
+/*** Program Function; To create an interfact in which the user can input employee information and output it into the console.
+ *** Creator; Paul Gaudnik, Mark Jarjour, Michael Luger
+ *** Submission Date; September 20th, 2016
+ *** Date Last Modified; September 19th, 2016
+ ***/
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.FlowLayout;
 
 public class UIEmployee extends JFrame {
 	private static final long serialVersionUID = 1371750691536720618L;
 	public static JPanel employeePanel = new JPanel();
 
 	public static void main (String[] args) {
-		UIEmployee OneFrame = new UIEmployee();
+		// Generating valid, invalid, and buffer lists.
 		List<Employee> validEmployees = new ArrayList<Employee>();
 		List<Employee> invalidEmployees = new ArrayList<Employee>();
 		List<Employee> employeeBuffer = new ArrayList<Employee>();
@@ -45,31 +49,36 @@ public class UIEmployee extends JFrame {
 		SalesTextField.setEditable(true);
 		employeePanel.add(SalesTextField);
 
+		// If "Add" button is pressed, fire this listener.
 		class buttonListenerADD implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				Boolean validInt;
-				Boolean validDouble;
-
 				String name = NameTextField.getText();
-				ImageIcon icon = new ImageIcon(UIEmployee.class.getResource("/assets/notice.tiff"));
-
+				ImageIcon icon = new ImageIcon(UIEmployee.class.getResource("/assets/notice.png"));
+				
+				// Parse the text fields to int and double then add the values to the buffer.
 				try {  
+					// Parse to the text fields to int and double
 					int hrs = Integer.parseInt(HrsTextField.getText());
 					double sales = Double.parseDouble(SalesTextField.getText());
+					
+					// Add it to the buffer.
 					employeeBuffer.add(new Employee(name, hrs, sales));
 
 					// Clear text fields.
 					NameTextField.setText("");
 					HrsTextField.setText("");
 					SalesTextField.setText("");
-				} catch (NumberFormatException nfe) {  
+				} catch (NumberFormatException nfe) { 
+					// If an error is caught then throw an error dialog.
 					JOptionPane.showMessageDialog(null, "You implicitly casted bastard." , "Output", JOptionPane.ERROR_MESSAGE, icon);
 				}
 			}
 		}
-
+		
+		// If "Add" button is pressed, fire this listener.
 		class buttonListenerSUBMIT implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
+				// Move buffer employee list to valid or invalid.
 				for (Employee emp : employeeBuffer) {
 					if (emp.isValid) {
 						validEmployees.add(emp);
@@ -91,25 +100,15 @@ public class UIEmployee extends JFrame {
 		submitButton.addActionListener(new buttonListenerSUBMIT());
 		employeePanel.add(submitButton);
 
+		// Set up frame.
+		UIEmployee OneFrame = new UIEmployee();
 		OneFrame.pack();
 		OneFrame.setTitle("Employee");
 		OneFrame.setSize(280,125);
 		OneFrame.setResizable(false);
-		OneFrame.setLocationRelativeTo(null);       //center the frame display
+		OneFrame.setLocationRelativeTo(null);
 		OneFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		OneFrame.add(employeePanel);           //add panel to the frame
-		OneFrame.setVisible(true);                  // set the frame visible
+		OneFrame.add(employeePanel);
+		OneFrame.setVisible(true);
 	}
-
-	//	class buttonListenerADD implements ActionListener {
-	//		public void actionPerformed(ActionEvent e) {
-	//			JButton button = (JButton) e.getSource();
-	//		}
-	//	}
-	//	
-	//	class buttonListenerSUBMIT implements ActionListener {
-	//		public void actionPerformed(ActionEvent e) {
-	//			JButton button = (JButton) e.getSource();
-	//		}
-	//	}
 }
