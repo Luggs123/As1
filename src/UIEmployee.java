@@ -1,4 +1,4 @@
-/*** Program Function; To create an interfact in which the user can input employee information and output it into the console.
+/*** Program Function; To accept employee information and incorporate Polymorphism, Abstract classes, and Interfaces.
  *** Creator; Paul Gaudnik, Mark Jarjour, Michael Luger
  *** Submission Date; September 20th, 2016
  *** Date Last Modified; September 19th, 2016
