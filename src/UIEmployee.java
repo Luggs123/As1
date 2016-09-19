@@ -1,6 +1,8 @@
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -49,6 +51,7 @@ public class UIEmployee extends JFrame {
 				Boolean validDouble;
 
 				String name = NameTextField.getText();
+				ImageIcon icon = new ImageIcon(UIEmployee.class.getResource("/assets/notice.tiff"));
 
 				try {  
 					int hrs = Integer.parseInt(HrsTextField.getText());
@@ -60,7 +63,7 @@ public class UIEmployee extends JFrame {
 					HrsTextField.setText("");
 					SalesTextField.setText("");
 				} catch (NumberFormatException nfe) {  
-					JOptionPane.showMessageDialog(null, "You implicitly casted bastard." , "Output", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "You implicitly casted bastard." , "Output", JOptionPane.ERROR_MESSAGE, icon);
 				}
 			}
 		}
