@@ -75,7 +75,7 @@ public class UIEmployee extends JFrame {
 			}
 		}
 		
-		// If "Add" button is pressed, fire this listener.
+		// If "Submit" button is pressed, fire this listener.
 		class buttonListenerSUBMIT implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// Move buffer employee list to valid or invalid.
