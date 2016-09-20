@@ -123,8 +123,9 @@ public class UIEmployee extends JFrame {
 					totalSalary += emp.getSalary();
 				}
 
-				System.out.printf("Total %32d%49.2f%n", totalHours, totalSalary);
-				System.out.println("Summary");
+				System.out.println("\n\n");
+				System.out.printf("Total %32d%49.2f%n%n", totalHours, totalSalary);
+				System.out.println("Summary:");
 				System.out.printf("Total number of employees: %29d%n", validEmployees.size() + invalidEmployees.size());
 				
 				if (invalidEmployees.size() != 0){
@@ -150,6 +151,7 @@ public class UIEmployee extends JFrame {
 		employeePanel.add(addButton);
 
 		JButton submitButton = new JButton("Submit");
+		submitButton.setToolTipText("Submit the information provided into the database and print it via console.");
 		submitButton.setDefaultCapable(true);
 		submitButton.addActionListener(new buttonListenerSUBMIT());
 		employeePanel.add(submitButton);
