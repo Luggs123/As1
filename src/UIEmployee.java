@@ -107,35 +107,38 @@ public class UIEmployee extends JFrame {
 						invalidEmployees.add(emp);
 					}
 				}
-				
+
 				int totalHours = 0;
 				double totalSalary = 0;
-				
+
 				System.out.println("Weekly Payroll Report");
-				System.out.printf("Name                Sales Amount Hours Overtime Amount Basic Amount Bonus Percent Total Salary");
-				
+				System.out.printf("Name                Sales Amount Hours Overtime Amount Basic Amount Bonus Percent Total Salary%n");
+
 				for (Employee emp : validEmployees) {
-					
+
 					System.out.printf("%-15s %-12.2f %5d %15.2f %12.2f %-13.2f %-12.2d", emp.getName(), emp.getSales(), emp.getHours(), 
 							emp.getOvertimePay(), emp.getBaseCommission(), emp.getBonusPercent()*100, emp.getSalary());
-					
+
 					totalHours += emp.getHours();
 					totalSalary += emp.getSalary();
 				}
-				
+
 				System.out.printf("Total %32d%52.2f", totalHours, totalSalary);
 				System.out.println("Summary");
-				System.out.printf("Total number of employees: %30d", validEmployees.size() + invalidEmployees.size());
-				System.out.printf("Number of employees with valid total sales amount: %5d", validEmployees.size());
-				System.out.println("Employees with invalid total sales amount:");
-				System.out.println("      Name         Weekly Sales Amount");
+				System.out.printf("Total number of employees: %30d%n", validEmployees.size() + invalidEmployees.size());
 				
-				int invEmpCounter = 1;
-				for (Employee emp : invalidEmployees) {
-					
-					System.out.printf("%-5d %-12s %19f", invEmpCounter, emp.getName(), emp.getSales());
-					
-					invEmpCounter++;
+				if (invalidEmployees.size() != 0){
+					System.out.printf("Number of employees with valid total sales amount: %5d%n", validEmployees.size());
+					System.out.println("Employees with invalid total sales amount:");
+					System.out.println("      Name         Weekly Sales Amount");
+
+					int invEmpCounter = 1;
+					for (Employee emp : invalidEmployees) {
+
+						System.out.printf("%-5d %-12s %19.2f%n", invEmpCounter, emp.getName(), emp.getSales());
+
+						invEmpCounter++;
+					}
 				}
 			}
 		}
