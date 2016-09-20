@@ -140,6 +140,8 @@ public class UIEmployee extends JFrame {
 						invEmpCounter++;
 					}
 				}
+				
+				System.exit(0);
 			}
 		}
 
