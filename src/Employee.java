@@ -67,11 +67,11 @@ public class Employee extends AbstractEmployee {
 	@Override
 	public void determineValidity(int hrs, double sales) {
 		//employee is invalid if less than zero or greater than 10,000 in sales, and hours worked less than zero or more than 60
-		if (sales < 0 || sales > 10000 || hrs > 60 || hrs < 0)
+		if (sales < 0 || sales > 10000)
 		{
-			this.setValid(true);
-		} else {
 			this.setValid(false);
+		} else {
+			this.setValid(true);
 		}
 	}
 	
