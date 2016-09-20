@@ -78,12 +78,6 @@ public class UIEmployee extends JFrame {
 				try {
 					// Parse text field.
 					sales = Double.parseDouble(salesTextField.getText());
-					
-					// If invalid hours then re-prompt.
-					if (sales < 0) {
-						JOptionPane.showMessageDialog(null, "\"Sales\" parameter must be greater than zero." , "Output", JOptionPane.ERROR_MESSAGE, icon);
-						validSales = false;
-					}
 				} catch (NumberFormatException nfe) { 
 					// If an error is caught then throw an error dialog.
 					JOptionPane.showMessageDialog(null, "Please enter a valid \"Sales\" parameter." , "Output", JOptionPane.ERROR_MESSAGE, icon);
