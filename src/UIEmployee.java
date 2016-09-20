@@ -67,12 +67,12 @@ public class UIEmployee extends JFrame {
 					// If invalid hours then re-prompt.
 					if (hrs < 0 || hrs > 60) {
 						JOptionPane.showMessageDialog(null, "\"Hours\" parameter must be between 0 and 60." , "Output", JOptionPane.ERROR_MESSAGE, icon);
-						validSales = false;
+						validHrs = false;
 					}
 				} catch (NumberFormatException nfe) { 
 					// If an error is caught then throw an error dialog.
 					JOptionPane.showMessageDialog(null, "Please enter a valid \"Hours\" parameter." , "Output", JOptionPane.ERROR_MESSAGE, icon);
-					validSales = false;
+					validHrs = false;
 				}
 
 				try {
@@ -127,7 +127,7 @@ public class UIEmployee extends JFrame {
 				System.out.println("Summary:");
 				System.out.printf("Total number of employees: %29d%n", validEmployees.size() + invalidEmployees.size());
 				
-				if (invalidEmployees.size() != 0){
+				if (invalidEmployees.size() > 0){
 					System.out.printf("Number of employees with valid total sales amount: %5d%n", validEmployees.size());
 					System.out.println("Employees with invalid total sales amount:");
 					System.out.println("      Name         Weekly Sales Amount");
@@ -159,7 +159,6 @@ public class UIEmployee extends JFrame {
 
 		// Set up frame.
 		UIEmployee OneFrame = new UIEmployee();
-		OneFrame.pack();
 		OneFrame.setTitle("Employee");
 		OneFrame.setSize(290,125);
 		OneFrame.setResizable(false);

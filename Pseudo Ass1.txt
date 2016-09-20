@@ -1,53 +1,176 @@
 interface Employable {
-	boolean determineValidity();
-	double calcBaseHoursPay(int hours);
-	double calcBaseCommissionPay(int sales);
-	double calcOvertime(int hours);
-	double calcCommission(double sales)
+	void computeSalary(int hrs, double sales);
+	double computeWage(int hrs);
+	double computeCommission(int sales);
+	void determineValidity(double sales);
 }
 
-class Employee implements Employable {
-	//relevant fields - name, sales, hours, salary, base pay and commission/overtime pays
+abstract class AbstractEmployee implements Employable {
 	String name;
 	double sales;
 	int hours;
-	double hourlyPay;
-	double baseHoursPay;
-	double baseCommissionPay
-	double commissionCut;
+	double salary;
+	boolean isValid;
 	double overtimePay;
+	double baseCommission;
+	double bonusPercent;
+}
+
+class Employee extends AbstractEmployee {
+	//all fields inherited from AbstractEmployee have Accessors and Mutators
 	
-	
-	Employee(String name, double sales, int hours, double hourlyPay){
-		this.name = name;
-		this.sales = sales;
-		this.hours = hours;
-		this.hourlyPay = hourlyPay;
+	Employee(String name, int hours, double sales){
+		this.setName(name);
+		this.setHours(hours);
+		this.setSales(sales);
+		this.determineValidity(this.sales);
+		if(this.isValid) { coomputeSalary(this.getHours(), this.getSales(); }
 	}
 
-	boolean determineValidity() {
+	@Override
+	boolean determineValidity(double sales) {
+		if (0 <= sales <= 10000) { return true; } else { return false; }
+	}
+
+	@Override
+	void computeSalary(int hrs, double sales) {
+		if (0 <= sales < 300) { this.setSalary(computeWage(hrs)); } else if (300 <= sales <= 10000) { this.setSalary(computeCommission(sales)); } else { this.setSalary(0); }
+	}
+	
+	double computeWage(int hrs) {
+		double hourlyPay = 10;
+		double overtimeMultiplier = 1.5;
+		int overtimeThreshold = 40;
+		double wagePay = 0;
+		double overtimePay = 0;
 		
+		wagePay = hourlyPay * min(overtimeThreshold, hrs);
+		overtimePay = hourlyPay * overtimeMultiplier * max(hrs - overtimeThreshold, 0);
+		
+		return wagePay + overtimePay;
 	}
+	
+	double computeCommission(double sales) {
+		double commpissionPay = 0;
+		
+		if (300 <= sales < 1000) {
+			this.setBaseCommission(400);
+			this.setBonusPercent(0.10);
+		} else if (1000 <= sales < 5000) {
+			this.setBaseCommission(600);
+			this.setBonusPercent(0.05);
+		} else if (5000 <= sales <= 10000) {
+			this.setBaseCommission(900);
+			this.setBonusPercent(0.01);
+		}
+		
+		commissionPay = sales * this.getBonusPercent();
+		return this.getBaseCommission() + commissionPay;	
+	}
+}
 
-	double calcBaseHoursPay(int hours) {
-		return hourlyPay*(min(40, hours));
-	}
+class UIEmployee extends JFrame {
+	static JPanel employeePanel = new JPanel();
 	
-	double calcBaseCommissionPay(double sales) {
-		if 300 < sales <= 1000, return 400;
-		if 1000 < sales <= 5000, return 600;
-		if 5000 < sales <= 10000, return 900;
-		else, return 0;
-	}
-	
-	double calcOvertime(int hours){
-		return 1.5*hourlyPay*(max(0, hours-40));
-	}
-	
-	double calcCommission(double sales){
-		if 300 < sales <= 1000, return 0.1*sales;
-		if 1000 < sales <= 5000, return 0.05*sales;
-		if 5000 < sales <= 10000, return 0.01*sales;
-		else, return 0;
+	public static void main(String[] args) {
+		List<Employee> validEmployees = new ArrayList<Employee>();
+		List<Employee> invalidEmployees = new ArrayList<Employee>();
+		List<Employee> employeeBuffer = new ArrayList<Employee>();
+		
+		employeePanel.setLayout(new FlowLayout());
+		
+		JLabel textFieldLabels = new JLabel("Employee Name: Hours: Sales: ");
+		
+		final JTextField  nameTextField = new JTextField();
+		final JTextField  hrsTextField = new JTextField();
+		final JTextField  salesTextField = new JTextField();
+		
+		nameTextField.setEditable(true);
+		hrsTextField.setEditable(true);
+		salesTextField.setEditable(true);
+		
+		employeePanel.add(nameTextField);
+		employeePanel.add(hrsTextField);
+		employeePanel.add(salesTextField);
+		
+		class ADDListener implements ActionListener {
+			void actionPerformed(ActionEvent e) {
+				String name = nameTextField.getText();
+				boolean validHrs = true;
+				boolean validSales = true;
+				int hrs = 0;double sales = 0;
+				
+				try {
+					hrs = Integer.parseInt(hrsTextField.getText());
+					
+					if (!(0 <= hrs <= 60)) {
+						//Show invalid hours dialog box
+					}
+				} catch (NumberFormatException nfe) {
+					//Show invalid hours input dialog box
+					validHrs = false;
+				}
+				
+				try {
+					hrs = Double.parseDouble(salesTextField.getText());
+				} catch (NumberFormatException nfe) {
+					//Show invalid sales input dialog box
+					validSales = false;
+				}
+				
+				if (validHrs && validSales) {
+					employeeBuffer.add(new Employee(name, hrs, sales));
+					
+					nameTextField.setText("");
+					hrsTextField.setText("");
+					salesTextField.setText("");
+				}
+			}
+		}
+		
+		class SUBMITListener implements ActionListener {
+			void actionPerformed(ActionEvent e) {
+				for (each Employee emp in employeeBuffer) {
+					if (emp.isValid()) { validEmployees.add(emp); } else { invalidEmployees.add(emp); }
+				}
+				
+				int totalHours = 0;
+				double totalSalary = 0;
+				
+				//Headers for payroll report
+				
+				for (each Employee emp in validEmployees) {
+					//Print valid employee info, increase totalHours and totalSalary appropriately
+				}
+				
+				//Print totalHrs and totalSales, Summary header, and validEmployees.size() + invalidEmployees.size()
+				
+				if (invalidEmployees.size() > 0) {
+					//Print number of employees with valid sales, headers for invalid employee list
+					
+					int invEmpCounter = 1;
+					
+					for (each Employee emp in invalidEmployees) {
+						//Print invalid Employee info with index of invalid employee (using invEmpCounter, increment invEmpCounter
+					}
+				}
+				
+				System.exit(0);
+			}
+		}
+		
+		JButton addButton = new JButton("Add");
+		addButton.addActionListener(new ADDListener());
+		employeePanel.add(addButton);
+		
+		JButton submitButton = new JButton("Submit");
+		submitButton.addActionListener(new SUBMITListener());
+		employeePanel.add(submitButton);
+		
+		UIEmployee OneFrame = new UIEmployee();
+		OneFrame.setLocationRelativeTo(null);
+		OneFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		OneFrame.add(employeePanel);
+		OneFrame.setVisible(true);
 	}
 }

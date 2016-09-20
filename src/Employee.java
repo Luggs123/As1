@@ -7,9 +7,9 @@ public class Employee extends AbstractEmployee {
 		this.setSales(sales);
 		
 		//salary only granted for valid employees
-		this.determineValidity(this.hours, this.sales);
+		this.determineValidity(this.getSales());
 		if (this.isValid) {
-			computeSalary(this.hours, this.sales);
+			computeSalary(this.getHours(), this.getSales());
 		}
 	}
 
@@ -65,7 +65,7 @@ public class Employee extends AbstractEmployee {
 	}
 
 	@Override
-	public void determineValidity(int hrs, double sales) {
+	public void determineValidity(double sales) {
 		//employee is invalid if less than zero or greater than 10,000 in sales, and hours worked less than zero or more than 60
 		if (sales < 0 || sales > 10000)
 		{
