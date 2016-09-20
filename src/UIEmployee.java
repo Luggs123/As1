@@ -116,7 +116,7 @@ public class UIEmployee extends JFrame {
 
 				for (Employee emp : validEmployees) {
 
-					System.out.printf("%-15s %-12.2f %5d %15.2f %12.2f %-13.2f %-12.2d", emp.getName(), emp.getSales(), emp.getHours(), 
+					System.out.printf("%-19s %-12.2f %5d %15.2f %12.2f %-13.2f %-12.2f%n", emp.getName(), emp.getSales(), emp.getHours(), 
 							emp.getOvertimePay(), emp.getBaseCommission(), emp.getBonusPercent()*100, emp.getSalary());
 
 					totalHours += emp.getHours();
