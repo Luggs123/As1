@@ -123,7 +123,6 @@ public class UIEmployee extends JFrame {
 					totalSalary += emp.getSalary();
 				}
 
-				System.out.println("\n\n");
 				System.out.printf("Total %32d%49.2f%n%n", totalHours, totalSalary);
 				System.out.println("Summary:");
 				System.out.printf("Total number of employees: %29d%n", validEmployees.size() + invalidEmployees.size());
