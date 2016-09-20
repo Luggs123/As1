@@ -123,9 +123,9 @@ public class UIEmployee extends JFrame {
 					totalSalary += emp.getSalary();
 				}
 
-				System.out.printf("Total %32d%52.2f", totalHours, totalSalary);
+				System.out.printf("Total %32d%49.2f%n", totalHours, totalSalary);
 				System.out.println("Summary");
-				System.out.printf("Total number of employees: %30d%n", validEmployees.size() + invalidEmployees.size());
+				System.out.printf("Total number of employees: %29d%n", validEmployees.size() + invalidEmployees.size());
 				
 				if (invalidEmployees.size() != 0){
 					System.out.printf("Number of employees with valid total sales amount: %5d%n", validEmployees.size());
